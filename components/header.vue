@@ -16,29 +16,38 @@
       </el-row>
       <!-- 登录注册 -->
       <div class="login_model">
-        <div class="login" v-if="false">
+        <div class="login"  v-if="!$store.state.user.userInfo.token">
           <nuxt-link to="/user/login">登录/注册</nuxt-link>
         </div>
-        <el-dropdown>
+        <div  v-else>
+          <el-dropdown>
           <span class="el-dropdown-link">
             <img
-              src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=400062461,2874561526&fm=27&gp=0.jpg"
-              alt
-            />
-            樱桃小王子
+              :src="$axios.defaults.baseURL+$store.state.user.userInfo.user.defaultAvatar"
+              alt='' />
+            {{$store.state.user.userInfo.user.username}}
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>个人中心</el-dropdown-item>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item @click.native="clearUserInfo">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
+        </div>
       </div>
     </el-row>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    clearUserInfo(){
+      // const {commit} = this.$store
+      this.$store.commit('user/clearUserInfo')
+      
+    }
+  }
+};
 </script>
 
 <style lang='less' scoped>

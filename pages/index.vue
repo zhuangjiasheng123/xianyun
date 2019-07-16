@@ -57,6 +57,8 @@ export default {
     }
   },
   mounted() {
+    console.log(this.$axios.defaults);
+    
     this.$axios({
       url: "/scenics/banners",
       method: "GET"
@@ -91,7 +93,7 @@ export default {
     position: absolute;
     top: 50%;
     left: 30%;
-    z-index: 3;
+    z-index: 2;
     //  margin-left: -500px;
     border-top: 1px transparent solid;
     .search-bar {
@@ -101,7 +103,7 @@ export default {
     .search-tab {
       .active{
       i{
-        color: red;
+        color: black;
       }
       &:after{
         background-color: #eee;
@@ -116,15 +118,13 @@ export default {
         cursor: pointer;
         i {
           position: absolute;
+          z-index: 1;
           display: block;
           width: 100%;
           height: 100%;
           line-height: 30px;
           text-align: center;
-          color: #ffffff;
-          // color: red;
-          font-weight: 900;
-          font-size: 18px;
+          color: #fff;
         }
         &:after {
           content: "";
