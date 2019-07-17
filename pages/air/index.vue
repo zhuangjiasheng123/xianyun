@@ -33,7 +33,20 @@
             <span class="iconfont icontejiajipiao"></span>
             <i>特价机票</i>
         </h2>
-        <div class="air_sale">特价机票</div>
+        <div class="air_sale">
+            <el-row type='flex' justify='space-between' class="air-sale-pic">
+                <el-col :span='6' v-for="(item,index) in sales" :key='index'>
+                    <nuxt-link :to="`/air/flights?departCity=${item.departCity}&departCode=${item.departCode}&destCity=${item.destCity}&destCode=${item.destCode}&departDate=${item.departDate}`">
+                        <img :src="item.cover" alt="">
+                        <el-row type='flex' justify='space-between' class="layer-bar">
+                        <span>{{item.departCity}}-{{item.destCity}}</span>
+                        <span>￥{{Number(item.price).toFixed(2)}}</span>
+                        </el-row>
+                    </nuxt-link>
+                </el-col>
+            </el-row>
+        </div>
+        
     </section>
 </template>
 <script>
@@ -44,8 +57,19 @@ export default {
     },
     data () {
         return {
-            
+            sales:[
+                
+            ]
         }
+    },
+    mounted () {
+        this.$axios({
+            url:'airs/sale',
+        }).then(res=>{
+            // console.log(res);
+            this.sales=res.data.data
+            
+        })
     }
 }
 </script>
@@ -86,6 +110,32 @@ export default {
     }
     *{
         vertical-align: middle;
+    }
+
+    .air_sale{
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 20px 0 30px 0;
+        .air-sale-pic{
+            >div{
+            width: 225px;
+            height: 140px;
+            overflow: hidden;
+            position: relative;
+            img{
+                width: 100%;
+            }
+            .layer-bar{
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
+                background: rgba(0, 0, 0, 0.4);
+                padding:5px;
+                color: white;
+                width: 100%;
+            }
+            }
+        }
     }
 }
 </style>
