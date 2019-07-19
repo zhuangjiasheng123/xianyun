@@ -44,7 +44,11 @@
             </el-col>
             <el-col :span="5" class="price">￥{{item.org_settle_price}}</el-col>
             <el-col :span="3" class="choose_button">
-              <el-button type="warning" size="mini">确定</el-button>
+              <el-button
+               type="warning" 
+               size="mini"
+               @click="changeToOrder(data.id,item.seat_id)"
+               >确定</el-button>
               <p>剩余：{{item.discount}}</p>
             </el-col>
           </el-row>
@@ -83,7 +87,18 @@ export default {
   data() {
     return {
      isshow:false
-    };
+    }
+  },
+  methods: {
+    changeToOrder(id,seat_id){
+      this.$router.push({
+        path:'/air/order',
+        query:{
+          id,
+          seat_id
+        }
+      })
+    }
   }
 };
 </script>

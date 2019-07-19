@@ -200,6 +200,13 @@ export default {
           query: this.form
         });
       }
+
+      const airs = JSON.parse(localStorage.getItem('airs')||`[]`)
+        if(airs.length>5){
+          airs.length=5
+        }
+        airs.unshift(this.form)
+      localStorage.setItem('airs',JSON.stringify(airs))
     }
   },
   mounted() {}
