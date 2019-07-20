@@ -41,11 +41,11 @@ export const actions={
     // 验证码请求
     sendCode(store,phoneNumber){
       return  this.$axios({
-            url:'captchas',
+            url:'/captchas',
             method:'POST',
             data:{tel:phoneNumber}
         }).then(res=>{
-            let {code} = res.data
+            const {code} = res.data
            return code
         })
     },

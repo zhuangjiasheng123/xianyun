@@ -47,7 +47,7 @@
               <el-button
                type="warning" 
                size="mini"
-               @click="changeToOrder(data.id,item.seat_id)"
+               @click="changeToOrder(data.id,item.seat_xid)"
                >确定</el-button>
               <p>剩余：{{item.discount}}</p>
             </el-col>
@@ -90,12 +90,12 @@ export default {
     }
   },
   methods: {
-    changeToOrder(id,seat_id){
+    changeToOrder(id,seat_xid){
       this.$router.push({
         path:'/air/order',
         query:{
           id,
-          seat_id
+          seat_xid
         }
       })
     }

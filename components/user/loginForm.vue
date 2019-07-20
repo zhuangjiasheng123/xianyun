@@ -51,7 +51,9 @@ methods: {
                .then(res=>{ 
                 //    console.log(res);
                    
-                   this.$router.push('/') 
+                //    this.$router.push('/') 
+                // 返回上一页，不呀直接进主页
+                this.$router.back(-1)
                    })
             }
         })
